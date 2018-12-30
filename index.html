@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- List of Metatags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="application-name" content="Walnut">
+  <meta name="author" content="Arian Raje">
+
+  <!-- Style Sheets + CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css"/>
+
+  <!-- Javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https:/use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+
+  <!-- Title of Website -->
+  <title>Walnut</title>
+
+  <!-- Website Icon -->
+  <link rel="icon" type="image/png" href="assets/Walnut_Icon.png">
+
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+<div class="container-fluid">
+  <a class="navbar-brand" href="#"><img src="assets/Walnut_Logo_Scaled.png"></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse"
+  data-target="#myNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="#" class="Home-Btn" href="index.html"><img src="assets/Home_Icon.png"></a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="Login-Btn" href="#"><img src="assets/Login_Icon.png"></a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<!-- Background Image -->
+<div id="Home" class="landing-text">
+  <h1 id="Title"></h1>
+  <script type="text/javascript">
+    $("#Title").typeIt({
+      strings: 'Walnut: Summaries à la A.I.',
+      speed: 100,
+      autoStart: false
+    });
+  </script>
+  <a class="btn try-btn" href="summary.html">Try It</a>
+  <script type="text/javascript">
+    $(function(){
+      $('#try-btn').click(function(){
+        window.location='summary.html'
+      });
+    });
+  </script>
+  <h3 id="Summary-Section">(Your Saved Summaries Go Here)</h3>
+</div>
+
+</body>
+</html>
