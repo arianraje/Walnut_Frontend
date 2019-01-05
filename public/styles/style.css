@@ -1,0 +1,209 @@
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+.Home-Btn img{
+  height: 45px;
+  position: relative;
+  right: 65%
+}
+
+.Login-Btn img {
+  height: 50px;
+  position: relative;
+  right: 5%;
+}
+
+#Home {
+  background:#5BA8E4;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
+
+#Title {
+  color: white;
+  position: relative;
+  top: 20%;
+  font-size: 50px;
+  text-align: center;
+  transform: translate(0, -50%);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.btn {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin:0 auto;
+  font-family: "Courier New";
+  font-size: 32px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 35px;
+  border: 2px solid #37688E;
+  border-radius: 400px;
+  background: #37688E;
+  transition: all 0.3s ease 0s;
+}
+
+.btn:hover {
+  font-size: 40px;
+  line-height: 43px;
+  color: white;
+}
+
+#Summary-Section {
+  color: white;
+  position: relative;
+  top: 60%;
+  font-size: 30px;
+  text-align: center;
+  transform: translate(0, -50%);
+  font-family: "Courier New", Courier, monospace;
+}
+
+#Selection {
+  color: white;
+  position: absolute;
+  top: 23%;
+  font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
+  left: 1%;
+}
+
+.Summarize {
+  top: 25%;
+  left: 90%;
+  color: white;
+}
+
+.choice {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  margin:0 auto;
+  font-family: "Courier New";
+  font-size: 20px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 35px;
+  border: 2px solid #37688E;
+  border-radius: 75px;
+  background: #37688E;
+  transition: all 0.3s ease 0s;
+  padding-top: 15%;
+}
+
+.choice:hover {
+  width: 22%;
+  height: 315px;
+  font-size: 24px;
+}
+
+.choice img {
+  position: absolute;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  top: 35%;
+  left: 50%;
+  height: 50%;
+}
+
+.Type-Text {
+  top: 60%;
+  left: 16%;
+}
+
+.URL {
+  top: 60%;
+  left: 82%;
+}
+
+.File {
+  top: 60%;
+  left: 50%;
+  overflow: hidden;
+}
+
+.File input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.User-Text {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 85%;
+  width: 90%;
+  font-family: "Courier New", Courier, monospace;
+  border: 2px solid #37688E;
+  background: #37688E;
+  color: white;
+}
+
+.User-URL {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 85%;
+  width: 95%;
+  font-family: "Courier New", Courier, monospace;
+  border: 2px solid #37688E;
+  background: #37688E;
+  color: white;
+}
+
+#text_container {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  left: 60%;
+  top: 60%;
+  height: 40%;
+  width: 50%;
+  border: 2px solid #5BA8E4;
+  background: #37688E;
+  border-radius: 75px;
+}
+
+#url_container {
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  position: absolute;
+  left: 35%;
+  top: 48%;
+  height: 7%;
+  width: 50%;
+  border: 2px solid #5BA8E4;
+  background: #37688E;
+  border-radius: 50px;
+}
+
+::placeholder {
+  color: white;
+}
