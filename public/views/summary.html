@@ -85,11 +85,7 @@
         $.ajax({
           type: "POST",
           url: "/posts",
-          data: {tags: tags},
-          success: function(data)
-          {
-            alert("Data Successfully Sent!");
-          }
+          data: {tags: tags}
         });
       }
       if ($('#url_container').length) {
@@ -97,11 +93,7 @@
         $.ajax({
           type: "POST",
           url: "/posts",
-          data: {tags: tags},
-          success: function(data)
-          {
-            alert("Data Successfully Sent!");
-          }
+          data: {tags: tags}
         });
       }
     });

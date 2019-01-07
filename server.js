@@ -3,8 +3,8 @@ var app = express();
 var router = express.Router();
 var path = '/Users/arianraje/Documents/Walnut_Frontend/public/views/';
 var bodyParser = require('body-parser');
-const fs = require('fs');
 const python = require('./controllers/python');
+const fs = require('fs');
 
 app.use(express.static('/Users/arianraje/Documents/Walnut_Frontend/public'));
 app.use(express.static('/Users/arianraje/Documents/Walnut_Frontend/public/views'));
@@ -12,6 +12,8 @@ app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.use(function (req,res,next) {
   console.log("/" + req.method);
@@ -33,25 +35,16 @@ app.post('/posts', async function (req, res) {
     console.log("File updated with new text. . .");
   });
   var data = await python.summarize();
-
-  var lineReader = require('readline').createInterface({
-    input: fs.createReadStream('./python/summary.txt')
-  });
-
-  var i = 0; var preview = "";
-  lineReader.on('line', function (line) {
-    if(++i > 5) {
-      lineReader.close();
-    }
-    preview = preview + "<br />" + line;
-  });
-
-  lineReader.on('close', function() {
-    console.log("exit");
-    res.send({"success": "true", "preview": preview});
-    // process.exit(0);
+  fs.readFile('./python/Summary.txt', 'utf8', function (err, summary) {
+      console.log(summary);
+      res.render(path + 'summary.html', {summary, summary});
   });
 });
+
+//app.get('/summary', function(req, res) {
+  //console.log(text);
+  //res.render(path + 'summary.html', {text: text});
+//});
 
 app.listen(3000,function(){
   console.log("Live at Port 3000");

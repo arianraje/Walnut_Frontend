@@ -1,22 +1,22 @@
 const {PythonShell} = require('python-shell');
 
 exports.summarize = async function(path) {
-  return new Promise(resolve => {
+  var options = {
+    mode: 'text',
+    pythonPath: 'python3',
+    pythonOptions: ['-u'],
+    scriptPath: '/Users/arianraje/Documents/Walnut_Frontend/python',
+  };
 
-    let options = {
-      mode: 'text',
-      pythonPath: '/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages',
-      pythonOptions: ['-u'],
-      args: ['value1', 'value2', 'value3']
-    };
+  var pyshell = new PythonShell('CreateScores.py', options)
+  pyshell.on('message', function (message) {
+    console.log(message);
+  });
 
-    PythonShell.run('python/CreateScores.py', options, function(err, results) {
-      if (err)
+  pyshell.end(function (err) {
+    if (err){
         throw err;
-
-      console.log('results: %j', results);
-      let data = {hello: results};
-      resolve(data);
-    });
+    };
+    console.log('Summary Written');
   });
 }

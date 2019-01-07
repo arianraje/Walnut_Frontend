@@ -35,13 +35,14 @@ class FinalScores(SumStrat):
     def write_summary(self):
         sentences = self.create_sentences()
         adj_scores = self.adjusted_scores()
-        summary = "Generated Summary: \n"
+        summary = open("/Users/arianraje/Documents/Walnut_Frontend/python/Summary.txt", "w+")
+        summary.write("Generated Summary: \n")
         for i in range(len(adj_scores)):
             if adj_scores[i] > 0.75:
                 sentences[i] = sentences[i].replace("\n", " ")
                 sentences[i] = sentences[i].replace('","description":', "")
                 sentences[i] = sentences[i].replace('","descriptionText":', "")
-                summary += " - {} \n".format(sentences[i])
-        return summary
+                summary.write(" - {} \n".format(sentences[i]))
+
 fin_scores = FinalScores()
 fin_scores.write_summary()

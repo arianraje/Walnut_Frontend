@@ -1,6 +1,4 @@
 import spacy
-# spacy.load('en_core_web_sm')
-from spacy.lang.en import English
 nlp = spacy.load("en")
 
 from nltk.tokenize import sent_tokenize

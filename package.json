@@ -1,6 +1,7 @@
 {
   "name": "Walnut_Frontend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "watch": "nodemon ./server.js"
@@ -17,13 +18,10 @@
   },
   "homepage": "https://github.com/arianraje/Walnut_Frontend#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "python-shell": "^1.0.7",
-    "tmp": "0.0.33"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.9"
-  },
-  "description": ""
+    "cross-env": "^5.2.0",
+    "ejs": "^2.6.1",
+    "html": "^1.0.0",
+    "node-gyp": "^3.8.0",
+    "python-shell": "^1.0.7"
+  }
 }

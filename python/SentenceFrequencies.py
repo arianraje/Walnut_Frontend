@@ -5,7 +5,7 @@ from SummarizationStrat import SumStrat
 
 class CreateFrequencies(SumStrat):
 
-    stop_words = open("/Users/philippeibl/Documents/Summa-Summarum-Backend/python/Stop_Words")
+    stop_words = open("/Users/arianraje/Documents/Walnut_Frontend/python/Stop_Words.txt")
     remove = stop_words.read()
 
     def create_word_tokens(self, string):
