@@ -35,7 +35,7 @@ class FinalScores(SumStrat):
     def write_summary(self):
         sentences = self.create_sentences()
         adj_scores = self.adjusted_scores()
-        summary = open("/Users/arianraje/Documents/Walnut_Frontend/python/Summary.txt", "w+")
+        summary = open("/Users/philippeibl/Documents/Walnut_Frontend/python/Summary.txt", "w+")
         summary.write("Generated Summary: \n")
         for i in range(len(adj_scores)):
             if adj_scores[i] > 0.75:

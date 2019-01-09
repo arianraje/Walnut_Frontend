@@ -5,7 +5,7 @@ exports.summarize = async function(path) {
     mode: 'text',
     pythonPath: 'python3',
     pythonOptions: ['-u'],
-    scriptPath: '/Users/arianraje/Documents/Walnut_Frontend/python',
+    scriptPath: '/Users/philippeibl/Documents/Walnut_Frontend/python',
   };
 
   var pyshell = new PythonShell('CreateScores.py', options)
