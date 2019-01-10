@@ -4,8 +4,8 @@ exports.summarize = async function(path) {
   var options = {
     mode: 'text',
     pythonPath: 'python3',
-    pythonOptions: ['-u'],
-    scriptPath: '/Users/arianraje/Documents/Walnut_Frontend/python',
+    pythonOptions: ['-u']
+    // scriptPath: '/Users/philippeibl/Documents/Walnut_Frontend/python',
   };
 
   var pyshell = new PythonShell('CreateScores.py', options)
@@ -15,7 +15,7 @@ exports.summarize = async function(path) {
 
   pyshell.end(function (err) {
     if (err){
-        throw err;
+        console.log(err);
     };
     console.log('Summary Written');
   });

@@ -60,7 +60,7 @@ class DocCreator:
         return fin_txt
 
     def txt_from_txt(self):
-        filepath = open("/Users/arianraje/Documents/Walnut_Frontend/python/tmp.txt", "r")
+        filepath = open("tmp.txt", "r")
         txt = filepath.read()
         list_sents = sent_tokenize(txt)
         new_sentences = self.filter_results(list_sents)
