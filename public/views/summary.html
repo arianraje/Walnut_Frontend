@@ -8,11 +8,14 @@
   <meta name="author" content="Arian Raje">
 
   <!-- Style Sheets + CDN -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="../styles/style.css">
+
+
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css"/>
 
   <!-- Javascript -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -31,10 +34,11 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
+<div>
+
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
   <div class="container-fluid">
-  <a class="navbar-brand" href="index.html"><img src="../assets/Walnut_Logo_Scaled.png"></a>
+  <a class="navbar-brand" href="index.html"><img src="../assets/Walnut_Logo_Scaled.png" /></a>
   <button type="button" class="navbar-toggler" data-toggle="collapse"
   data-target="#myNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -42,32 +46,29 @@
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="index.html" class="Home-Btn"><img src="../assets/Home_Icon.png"></a>
+        <a href="index.html" class="Home-Btn"><img src="../assets/Home_Icon.png" /></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="Login-Btn"><img src="../assets/Login_Icon.png"></a>
+        <a href="#" class="Login-Btn"><img src="../assets/Login_Icon.png" /></a>
       </li>
     </ul>
   </div>
 </div>
 </nav>
 
-<!-- Background Image -->
 <div id="Home" class="landing-text">
   <a class="btn Summarize">Summarize</a>
   <h3 id="Selection">Choose to type your text, upload a file, or enter a URL. . .</h3>
 
-  <!-- 3 Button Section -->
-  <button class="choice Type-Text">Type Text
-    <img src="../assets/Text_Symbol.png">
-  </button>
-  <button class="choice URL">Enter URL
-    <img src="../assets/URL_Symbol.png">
-  </button>
   <button class="choice File">Upload File
-    <img src="../assets/File_Symbol.png">
-    <input type="file">
+    <img src="../assets/File_Symbol.png" />
+    <input type="file" name='file1' id='file1' className="custom-file-input" onChange="uploadFile();"/>
   </button>
+</div>
+
+
+<div class="editor" id="editor"><textarea id="userText" class="User-Text " placeholder="Enter text..." ></textarea><button class="txtSubmitBtn" onClick="uploadText();">Summarize</button></div>
+</div>
   <script type="text/javascript">
     $(".Type-Text").click(function() {
       $(".URL").remove();
@@ -97,8 +98,135 @@
         });
       }
     });
+
+    function openEditor() {
+  _("Home").innerHTML = "";
+  _("editor").style.visibility = 'visible';
+}
+
+function uploadText() {
+  axios.post('http://localhost:3000/upload', {
+    foo: 'bar'
+  }).catch(error => {
+    console.log(error);
+  })
+}
+
+function _(el) {
+  return document.getElementById(el);
+}
+
+function uploadFile(e) {
+  //e.preventDefault();
+  uploadUsingAJAX();
+}
+
+function uploadUsingAJAX() {
+  var file = _("file1").files[0];
+  makeCorsRequest();
+  // alert(file.name+" | "+file.size+" | "+file.type);
+  var formdata = new FormData();
+  formdata.append("file1", file);
+  var ajax = new XMLHttpRequest();
+  ajax.upload.addEventListener("progress", progressHandler, false);
+  ajax.addEventListener("load", completeHandler, false);
+  ajax.addEventListener("error", errorHandler, false);
+  ajax.addEventListener("abort", abortHandler, false);
+  ajax.open("POST", "http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload");
+  ajax.setRequestHeader("Access-Control-Allow-Origin","*, http://www.walnutai.io");
+  ajax.setRequestHeader("Access-Control-Allow-Credentials", "true");
+  ajax.setRequestHeader("Access-Control-Allow-Methods", "POST");
+  ajax.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+  ajax.send(formdata);
+}
+
+// Make the actual CORS request.
+function makeCorsRequest() {
+  // This is a sample server that supports CORS.
+  var url = 'http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload';
+
+  var xhr = createCORSRequest('POST', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    var title = getTitle(text);
+    alert('Response from CORS request to ' + url + ': ' + title);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+function uploadUsingAXIOS2() {
+  var config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    onUploadProgress: function(progressEvent) {
+      var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+    }
+  }
+
+  axios(config);
+  axios.post('http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload', formdata, config).then(function(response) {
+    console.log('reponse: ' + response);
+  }).catch(function(error) {
+    console.log(error);
+  });
+}
+
+function progressHandler(event) {
+  console.log('progressHandler');
+  _('Home').innerHTML = '<div class="summary"><p>Loading...</p></div>';
+
+  // _("start").parentNode.removeChild(_("start"));
+  // _("progressBar").style.visibility = "visible";
+  // _("progressC").style.visibility = "visible";
+  // _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+  // var percent = (event.loaded / event.total) * 100;
+  // _("progressBar").value = Math.round(percent);
+  // _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+}
+
+function completeHandler(event) {
+  console.log('completeHandler');
+  _('Home').innerHTML = '<div class="summary"><p>'+JSON.parse(event.srcElement.response).preview+'</p></div>';
+  console.log(event.srcElement.response);
+}
+
+function errorHandler(event) {
+  alert("upload failed")
+}
+
+function abortHandler(event) {
+  _("status").innerHTML = "Upload Aborted";
+}
   </script>
-</div>
 
 </body>
 </html>

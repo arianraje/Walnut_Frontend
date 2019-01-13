@@ -26,8 +26,19 @@ app.use(function (req,res,next) {
 });
 
 app.get("/",function(req,res){
-  res.sendFile("./public/views/index.html");
-  res.sendFile("./public/views/summary.html");
+  res.sendFile(__dirname + "/public/views/index.html");
+  // res.sendFile("./public/views/summary.html");
+});
+
+app.get("/styles/style.css",function(req,res){
+  res.sendFile(__dirname + "/public/styles/style.css");
+  // res.sendFile("./public/views/summary.html");
+});
+
+
+app.get("/summary.html",function(req,res){
+  res.sendFile(__dirname + "/public/views/summary.html");
+  // res.sendFile("./public/views/summary.html");
 });
 
 
