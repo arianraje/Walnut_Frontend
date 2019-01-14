@@ -1,6 +1,7 @@
 from SentenceClustering import ClusterSentences
 from SentenceFrequencies import CreateFrequencies
 from TitleRelationships import TitleSimilarity
+import os
 
 from nltk.tokenize import sent_tokenize
 from SummarizationStrat import SumStrat
@@ -35,7 +36,7 @@ class FinalScores(SumStrat):
     def write_summary(self):
         sentences = self.create_sentences()
         adj_scores = self.adjusted_scores()
-        summary = open("Summary.txt", "w+")
+        summary = open(os.getcwd() + "/python/Summary.txt", "w+")
         summary.write("Generated Summary: \n")
         for i in range(len(adj_scores)):
             if adj_scores[i] > 0.75:

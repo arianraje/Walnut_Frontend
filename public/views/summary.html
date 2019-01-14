@@ -59,45 +59,23 @@
 <div id="Home" class="landing-text">
   <a class="btn Summarize">Summarize</a>
   <h3 id="Selection">Choose to type your text, upload a file, or enter a URL. . .</h3>
-
+  <form ref='uploadForm'
+        id='uploadForm'
+        action='http://localhost:3000/upload' 
+        method='post'
+        encType="multipart/form-data">
   <button class="choice File">Upload File
     <img src="../assets/File_Symbol.png" />
     <input type="file" name='file1' id='file1' className="custom-file-input" onChange="uploadFile();"/>
   </button>
+
+</form>
 </div>
 
 
 <div class="editor" id="editor"><textarea id="userText" class="User-Text " placeholder="Enter text..." ></textarea><button class="txtSubmitBtn" onClick="uploadText();">Summarize</button></div>
 </div>
   <script type="text/javascript">
-    $(".Type-Text").click(function() {
-      $(".URL").remove();
-      $(".File").remove();
-      $("#Home").append('<div id="text_container"><form method="post" action="/"><input type="hidden" name="chat" id="hiddenInput"/><textarea class="User-Text" placeholder="Enter your text here. . ."></textarea></form></div>')
-    });
-    $(".URL").click(function() {
-      $(".Type-Text").remove();
-      $(".File").remove();
-      $("#Home").append('<div id="url_container"><form method="post" action="/"><textarea class="User-URL">https://</textarea></form></div>')
-    });
-    $(".Summarize").click(function() {
-      if ($('#text_container').length) {
-        var tags = $('textarea.User-Text').val();
-        $.ajax({
-          type: "POST",
-          url: "/posts",
-          data: {tags: tags}
-        });
-      }
-      if ($('#url_container').length) {
-        var tags = $('textarea.User-URL').val();
-        $.ajax({
-          type: "POST",
-          url: "/posts",
-          data: {tags: tags}
-        });
-      }
-    });
 
     function openEditor() {
   _("Home").innerHTML = "";
@@ -119,12 +97,15 @@ function _(el) {
 function uploadFile(e) {
   //e.preventDefault();
   uploadUsingAJAX();
+  // makeCorsRequest();
 }
 
 function uploadUsingAJAX() {
   var file = _("file1").files[0];
-  makeCorsRequest();
-  // alert(file.name+" | "+file.size+" | "+file.type);
+  // var url = 'http://ec2-13-59-67-128.us-east-2.compute.amazonaws.com/upload';
+  var url = 'http://localhost:3000/upload';
+
+   // alert(file.name+" | "+file.size+" | "+file.type);
   var formdata = new FormData();
   formdata.append("file1", file);
   var ajax = new XMLHttpRequest();
@@ -132,8 +113,9 @@ function uploadUsingAJAX() {
   ajax.addEventListener("load", completeHandler, false);
   ajax.addEventListener("error", errorHandler, false);
   ajax.addEventListener("abort", abortHandler, false);
-  ajax.open("POST", "http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload");
-  ajax.setRequestHeader("Access-Control-Allow-Origin","*, http://www.walnutai.io");
+  ajax.open("POST", url);
+
+  ajax.setRequestHeader("Access-Control-Allow-Origin","*, http://");
   ajax.setRequestHeader("Access-Control-Allow-Credentials", "true");
   ajax.setRequestHeader("Access-Control-Allow-Methods", "POST");
   ajax.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -143,7 +125,8 @@ function uploadUsingAJAX() {
 // Make the actual CORS request.
 function makeCorsRequest() {
   // This is a sample server that supports CORS.
-  var url = 'http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload';
+  // var url = 'http://ec2-13-59-67-128.us-east-2.compute.amazonaws.com/upload';
+  var url = 'http://localhost:3000/upload';
 
   var xhr = createCORSRequest('POST', url);
   if (!xhr) {
@@ -154,8 +137,8 @@ function makeCorsRequest() {
   // Response handlers.
   xhr.onload = function() {
     var text = xhr.responseText;
-    var title = getTitle(text);
-    alert('Response from CORS request to ' + url + ': ' + title);
+    // var title = text
+    alert('Response from CORS request to ' + url + ': title');
   };
 
   xhr.onerror = function() {
@@ -193,7 +176,7 @@ function uploadUsingAXIOS2() {
   }
 
   axios(config);
-  axios.post('http://ec2-18-191-10-250.us-east-2.compute.amazonaws.com:3000/upload', formdata, config).then(function(response) {
+  axios.post('http://www.walnutai.io/upload', formdata, config).then(function(response) {
     console.log('reponse: ' + response);
   }).catch(function(error) {
     console.log(error);

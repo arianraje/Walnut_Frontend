@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var router = express.Router();
+const fileUpload = require('express-fileupload');
 // var path = '/Users/philippeibl/Documents/Walnut_Frontend/public/views/';
 var bodyParser = require('body-parser');
 const python = require('./controllers/python');
@@ -9,6 +10,7 @@ const fs = require('fs');
 // app.use(express.static('/Users/philippeibl/Documents/Walnut_Frontend/public'));
 // app.use(express.static('/Users/philippeibl/Documents/Walnut_Frontend/public/views'));
 app.use( bodyParser.json() );
+app.use(fileUpload());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -43,17 +45,17 @@ app.get("/summary.html",function(req,res){
 
 
 app.post('/upload', async function (req, res) {
-  var text = req.body.tags;
-  fs.writeFile("./python/tmp.txt", text, function(err) {
-    if(err) {
-      return console.log(err);
-    }
-    console.log("File updated with new text. . .");
-  });
-  var data = await python.summarize();
+  var text = req.files.file1;
+
+  req.files.file1.mv("./python/tmp.txt");
+console.log('moved');
+
+    var data = await python.summarize();
+
   fs.readFile('./python/Summary.txt', 'utf8', function (err, summary) {
       console.log(summary);
       // res.render(path + 'summary.html', {summary, summary});
+
       res.send({"success": "true", "preview": summary});
   });
 });
@@ -62,7 +64,7 @@ app.post('/upload', async function (req, res) {
   //console.log(text);
   //res.render(path + 'summary.html', {text: text});
 //});
-
-app.listen(3030,function(){
-  console.log("Live at Port 3030");
+var port = 3000
+app.listen(port,function(){
+  console.log("Live at Port 3000");
 });
