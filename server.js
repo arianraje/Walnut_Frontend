@@ -1,6 +1,8 @@
 var express = require("express");
 var app = express();
 var router = express.Router();
+var cors = require('cors')
+
 const fileUpload = require('express-fileupload');
 // var path = '/Users/philippeibl/Documents/Walnut_Frontend/public/views/';
 var bodyParser = require('body-parser');
@@ -11,6 +13,8 @@ const fs = require('fs');
 // app.use(express.static('/Users/philippeibl/Documents/Walnut_Frontend/public/views'));
 app.use( bodyParser.json() );
 app.use(fileUpload());
+app.use(cors())
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -68,3 +72,4 @@ var port = 3000
 app.listen(port,function(){
   console.log("Live at Port 3000");
 });
+
