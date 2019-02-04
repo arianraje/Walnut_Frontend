@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='styles/main.css' type="text/css">
+    <script src="functions/scripts.js"></script>
+
+    </head>
+<body>
+    <div class='main'>
+        <div class='control-panel'>
+            <div class='logo-section'>
+                <div class='logo-container'>
+                        <img class='logo-img' src='assets/walnut_logo.png' />
+                    <p class='logo-slogan'>
+                        Summaries á la A.I.
+                    </p>
+                </div>
+            </div>
+            <div class='control-section'>
+                <div class='control-section-file-upload control-section-btn' onclick='openUploadFile()'>
+                    <div class='control-section-btn-img-container'>
+                        <img class='control-section-btn-img' src='assets/file.png' />
+                    </div>
+                    <div class='control-section-btn-text-container'>
+                        <span class='control-section-btn-text'>Upload File</span>
+                    </div>
+                </div>
+
+                <div class='control-section-text control-section-btn'>
+                    <div class='control-section-btn-img-container'>
+                        <img class='control-section-btn-img' src='assets/text.png' />
+                    </div>
+                    <div class='control-section-btn-text-container'>
+                        <span class='control-section-btn-text'>Type Text</span>
+                    </div>
+                </div>
+                <div class='control-section-url control-section-btn'>
+                    <div class='control-section-btn-img-container'>
+                        <img class='control-section-btn-img' src='assets/url.png' />
+                    </div>
+                    <div class='control-section-btn-text-container'>
+                        <span class='control-section-btn-text'>Enter URL</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class='action-panel'>
+            <div id='action-panel-container-2'>
+
+              <form ref='uploadForm'
+        id='uploadForm'
+        method='post'
+        encType="multipart/form-data" class="upload-btn-wrapper-1">
+              <button class="btn-1">Upload a file</button>
+              <input type="file" name='file1' id='file1' onChange="uploadFile();"/>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
