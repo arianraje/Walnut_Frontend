@@ -7,14 +7,20 @@ class SumStrat():
     dc = DocCreator()
 
     txt = dc.find_txt()
-    txt_to_summarize = os.linesep.join([s for s in txt.splitlines() if s])
+    if txt != "Filetype Not Recognized":
+        txt_to_summarize = os.linesep.join([s for s in txt.splitlines() if s])
+    else:
+        txt_to_summarize = txt
 
     def sentence_importances(self):
         pass
 
     def create_sentences(self):
-        sentence_tokens = sent_tokenize(self.txt_to_summarize)
-        return sentence_tokens
+        if txt_to_summarize != "Filetype Not Recognized":
+            sentence_tokens = sent_tokenize(self.txt_to_summarize)
+            return sentence_tokens
+        else:
+            return "Filetype Not Recognized"
 
     def adjusted_scores(self):
         scores = self.sentence_importances()
