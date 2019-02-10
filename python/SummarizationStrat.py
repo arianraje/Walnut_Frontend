@@ -5,6 +5,7 @@ from nltk.tokenize import sent_tokenize
 class SumStrat():
 
     dc = DocCreator()
+    txt_to_summarize = ''
 
     txt = dc.find_txt()
     if txt != "Filetype Not Recognized":
