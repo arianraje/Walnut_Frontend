@@ -12,8 +12,11 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
 from PIL import Image
 import pytesseract
+import filetype
 
 class DocCreator:
+
+    fp = "./python/tmp"
 
     def filter_results(self, list_sents):
         dictionary = enchant.Dict("en_US")
@@ -52,15 +55,14 @@ class DocCreator:
         return fin_txt
 
     def txt_from_Docx(self):
-        filepath = input("Enter the filepath here: ")
-        txt = docx2txt.process(filepath)
+        txt = docx2txt.process(fp)
         list_sents = sent_tokenize(txt)
         new_sentences = self.filter_results(list_sents)
         fin_txt = ' '.join(new_sentences)
         return fin_txt
 
     def txt_from_txt(self):
-        filepath = open(os.getcwd() + "/python//tmp.txt", "r")
+        filepath = open(fp, "r")
         txt = filepath.read()
         list_sents = sent_tokenize(txt)
         new_sentences = self.filter_results(list_sents)
@@ -76,8 +78,7 @@ class DocCreator:
         manager = PDFResourceManager()
         converter = TextConverter(manager, output, laparams=LAParams())
         interpreter = PDFPageInterpreter(manager, converter)
-        file = input("Enter the filepath here: ")
-        infile = open(file, 'rb')
+        infile = open(fp, 'rb')
         for page in PDFPage.get_pages(infile, pagenums):
             interpreter.process_page(page)
         infile.close()
@@ -93,22 +94,21 @@ class DocCreator:
         return fin_txt
 
     def txt_from_Image(self):
-        file = input("Enter the filepath here: ")
-        txt = pytesseract.image_to_string(Image.open(file))
+        txt = pytesseract.image_to_string(Image.open(fp))
         list_sents = sent_tokenize(txt)
         new_sentences = self.filter_results(list_sents)
         fin_txt = ' '.join(new_sentences)
         return fin_txt
 
     def find_txt(self):
-        choice = 1
-        if int(choice) == 1:
-            return self.txt_from_txt()
-        elif int(choice) == 2:
-            return self.txt_from_Docx()
-        elif int(choice) == 3:
+        kind = filetype.guess(fp)
+        if kind.extension == 'pdf':
             return self.txt_from_PDF()
-        elif int(choice) == 4:
-            return self.txt_from_HTML()
-        else:
+        elif kind.extension == 'png':
             return self.txt_from_Image()
+        elif kind.extension == 'txt':
+            return self.txt_from_txt()
+        elif kind.extension == 'zip':
+            return self.txt_from_Docx()
+        else:
+            return "Filetype Not Recognized"
